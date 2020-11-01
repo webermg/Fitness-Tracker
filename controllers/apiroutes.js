@@ -24,12 +24,12 @@ router.post("/api/workouts", (req,res) => {
     .catch(err => res.json(err))
 })
 
-router.post("/api/workout/:id/exercises", (req,res)=> {
+router.post("/api/workouts/:id/exercises", (req,res)=> {
   db.Exercise.create(req.body)
   .then(exercise=>{
     db.Workout.findOne({_id:req.params.id})
   .then(workout=>{
-    workout.exercises.push(exercise);
+    workout.exercises.push(exercise._id);
     workout.save(resp=>res.json(resp));
   })
   .catch(err=>res.json(err))
