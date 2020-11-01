@@ -11,34 +11,52 @@ const setsField = document.getElementById("sets-field");
 const repsField = document.getElementById("reps-field");
 const addButton = document.getElementById("add-button")
 
-//something to handle change event on radio
-if(addForm) {
-  addForm.addEventListener("change", function(e) {
-    if(e.target.value === "cardio") {
+if (workoutCard) {
+  // Delete exercise button handler
+  workoutCard.addEventListener("click", function (e) {
+    if (e.target.classList.contains("del-btn")) {
+      const id = e.target.getAttribute("data-id")
+      fetch(`/api/exercises/${id}`, {
+        method: "DELETE",
+        headers: { "Content-Type": "application/json" }
+      })
+        .then(res => {
+          console.log(res);
+          location.reload();
+        })
+        .catch(err => console.log(err));
+    }
+  })
+}
+
+
+if (addForm) {
+  // Radio button change handler
+  addForm.addEventListener("change", function (e) {
+    if (e.target.value === "cardio") {
       //disable weight fields
-      weightField.disabled=true;
-      setsField.disabled=true;
+      weightField.disabled = true;
+      setsField.disabled = true;
       repsField.disabled = true;
       //enable cardio fields
-      distanceField.disabled=false;
+      distanceField.disabled = false;
     }
-    else {
+    if (e.target.value === "weights") {
       //disable cardio fields
-      distanceField.disabled=true;
+      distanceField.disabled = true;
       //enable weight fields
-      weightField.disabled=false;
-      setsField.disabled=false;
+      weightField.disabled = false;
+      setsField.disabled = false;
       repsField.disabled = false;
     }
   })
 
-//something to handle add button click
-
+  // Add exercise button handler
   addButton.addEventListener("click", () => {
     const newExercise = {};
     newExercise.name = nameField.value;
     newExercise.duration = durationField.value != "" ? durationField.value : 0;
-    if(cardioRadio.checked) {
+    if (cardioRadio.checked) {
       newExercise.type = "cardio"
       newExercise.distance = distanceField.value != "" ? distanceField.value : 0;
     }
@@ -49,16 +67,16 @@ if(addForm) {
       newExercise.reps = repsField.value != "" ? repsField.value : 0;
     }
     //make request
-    const id=workoutCard.getAttribute("data-id");
+    const id = workoutCard.getAttribute("data-id");
     fetch(`/api/workouts/${id}/exercises`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(newExercise)
     })
-    .then(res => {
-      console.log(res);
-      location.reload();
-    })
-    .catch(err => console.log(err));
+      .then(res => {
+        console.log(res);
+        location.reload();
+      })
+      .catch(err => console.log(err));
   })
 }
