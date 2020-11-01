@@ -1,0 +1,107 @@
+<div class="container">
+  <h1>Workout Tracker</h1>
+  <div class="row">
+    <div class="col-12">
+      {{#each workouts}}
+      <div data-id="{{this.id}}" class="card workout-card" style="width: 30rem;">
+        <div class="card-body">
+          <h5 class="card-title">{{formatDate this.day}}</h5>
+          <h6>{{this.totalDuration}} minutes</h6>
+        </div>
+
+        <div class="accordion" id="accordionExample">
+          {{#each this.exercises}}
+          <div class="card">
+            <div class="card-header" id="heading{{this._id}}">
+              <h2 class="mb-0">
+                <button class="btn btn-link btn-block text-left" type="button" data-toggle="collapse"
+                  data-target="#collapse{{this._id}}" aria-expanded="true" aria-controls="collapse{{this._id}}">
+                  {{this.name}}
+                </button>
+              </h2>
+            </div>
+
+            <div id="collapse{{this._id}}" class="collapse" aria-labelledby="heading{{this._id}}"
+              data-parent="#accordionExample">
+              <div class="card-body">
+                <ul class="list-group list-group">
+                  <li class="list-group-item">Type: {{this.type}}</li>
+                  <li class="list-group-item">Duration: {{this.duration}} minutes</li>
+                  {{#if (isCardio this.type)}}
+                  <li class="list-group-item">Distance: {{this.distance}} miles</li>
+                  {{else}}
+                  <li class="list-group-item">Weight: {{this.weight}} lbs</li>
+                  <li class="list-group-item">Sets: {{this.sets}}</li>
+                  <li class="list-group-item">Reps: {{this.reps}}</li>
+                  {{/if}}
+
+                </ul>
+              </div>
+            </div>
+          </div>
+          {{/each}}
+        </div>
+
+
+
+      </div>
+      {{/each}}
+    </div>
+  </div>
+  {{#if workouts}}
+  <div class="row">
+    <div class="col-12">
+      <div class="card" style="width: 30rem;">
+        <div class="card-body">
+          <h5 class="card-title">Add exercise to workout</h5>
+          <form id="add-form">
+            <div class="row">
+              <div class="col">
+                <input type="text" id="name-field" class="form-control" placeholder="Name">
+              </div>
+            </div>
+            <div class="row">
+              <div class="col">
+                <input type="number" min="0" id="duration-field" class="form-control" placeholder="Duration">
+              </div>
+            </div>
+            <hr />
+            <div id="radio-area" class="form-check form-check-inline">
+              <input class="form-check-input" type="radio" name="radio-buttons" id="cardio-radio" value="cardio"
+                checked>
+              <label class="form-check-label" for="cardio-radio">
+                Cardio
+              </label>
+            </div>
+            <div class="form-check form-check-inline">
+              <input class="form-check-input" type="radio" name="radio-buttons" id="weights-radio" value="weights">
+              <label class="form-check-label" for="weights-radio">
+                Weights
+              </label>
+            </div>
+            <hr />
+            <div class="row">
+              <div class="col">
+                <input type="number" min="0" id="distance-field" class="form-control" placeholder="Distance">
+              </div>
+              <div class="col">
+                <input type="number" min="0" id="weight-field" class="form-control" placeholder="Weight" disabled>
+                <input type="number" min="0" id="sets-field" class="form-control" placeholder="Sets" disabled>
+                <input type="number" min="0" id="reps-field" class="form-control" placeholder="Reps" disabled>
+              </div>
+            </div>
+            <hr />
+            <div class="row">
+              <div class="col">
+                <button type="button" id="add-button" class="btn btn-primary float-right">Add</button>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+  {{/if}}
+</div>
+
+<script src="js/view.js"></script>
