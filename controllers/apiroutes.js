@@ -48,4 +48,12 @@ router.put("/api/workouts/:id", (req,res)=>{
   .catch(err=>res.json(err))
 })
 
+router.delete("/api/exercises/:id", (req,res)=>{
+  db.Exercise.findByIdAndDelete(req.params.id)
+  .then(data => {
+    res.json(data);
+  })
+  .catch(err=>res.json(err))
+})
+
 module.exports = router;
