@@ -1,31 +1,11 @@
-<h1>Workout Tracker</h1>
-<div class="row">
-  <div class="col-12">
-    {{#each workouts}}
-    <div class="card" style="width: 18rem;">
-      
-      <div class="card-body">
-        <h5 class="card-title">{{this.day}}</h5>
-      </div>
-      <ul class="list-group list-group-flush">
-        {{#each this.exercises}}
-        <li class="list-group-item">
-          <ul>
-            <li>{{this.name}}</li>
-            <li>{{this.type}}</li>
-            <li>{{this.duration}}</li>
-            {{#if (isCardio this.type)}}
-            <li>{{this.distance}}</li>
-            {{else}}
-            <li>{{this.weight}}</li>
-            <li>{{this.sets}}</li>
-            <li>{{this.reps}}</li>
-            {{/if}}
-          </ul>
-        </li>
-        {{/each}}
-      </ul>
+<div class="container">
+  <div class="row">
+    <div class="col-12">
+      <button type="button" onclick="location.href='/view';" class="btn btn-primary btn-lg">Continue last
+        workout</button>
+      <button type="button" id="new-button" class="btn btn-secondary btn-lg">Create new workout</button>
     </div>
-    {{/each}}
   </div>
 </div>
+
+<script src="js/home.js"></script>
