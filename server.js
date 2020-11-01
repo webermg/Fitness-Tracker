@@ -26,6 +26,9 @@ const hbs = exphbs.create({
   helpers:{
     isCardio:function(str) {
       return str === "cardio";
+    },
+    formatDate:function(date) {
+      return date.toLocaleDateString();
     }
   }
 });
