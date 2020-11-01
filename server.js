@@ -1,7 +1,7 @@
 // Dependencies
 // =============================================================
 const express = require("express");
-const mongoose = require("mongoose")
+const mongoose = require("mongoose");
 const db = require("./models");
 
 // Sets up the Express App
@@ -14,14 +14,20 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
 //mongodb
-mongoose.connect(process.eng.MONGODB_URI || "mongodb://localhost/fitness_db", {useNewUrlParser: true});
+mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/fitness_db", {useNewUrlParser: true});
 
 // Static directory to be served
 app.use(express.static("public"));
 
 const exphbs = require('express-handlebars');
+const { json } = require("express");
 const hbs = exphbs.create({
-  defaultLayout: 'main'
+  defaultLayout: 'main',
+  helpers:{
+    isCardio:function(str) {
+      return str === "cardio";
+    }
+  }
 });
 
 app.engine('handlebars', hbs.engine);
@@ -29,9 +35,10 @@ app.set('view engine', 'handlebars');
 
 // Routes
 // =============================================================
-app.use("/api",require("./controllers/apiroutes"));
-app.use("/",require("./controllers/htmlroutes"));
-
+// app.use("/api",require("./controllers/apiroutes"));
+// app.use("/",require("./controllers/htmlroutes"));
+app.use(require("./controllers/htmlroutes"));
+app.use(require("./controllers/apiroutes"));
 // Starts the server to begin listening
 // =============================================================
 
