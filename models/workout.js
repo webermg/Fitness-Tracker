@@ -1,5 +1,6 @@
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
+const mlv = require("mongoose-lean-virtuals")
 
 const WorkoutSchema = new Schema({
     day: {
@@ -13,7 +14,7 @@ const WorkoutSchema = new Schema({
         ref: "Exercise"
       }
     ]
-});
+}, { toJSON: { virtuals: true } });
 
 WorkoutSchema.virtual('totalDuration').get(function() {
     let duration = 0;
@@ -25,6 +26,7 @@ WorkoutSchema.virtual('totalDuration').get(function() {
     return duration;
 });
 
+WorkoutSchema.plugin(mlv);
 
 const Workout = mongoose.model("Workout", WorkoutSchema);
 
