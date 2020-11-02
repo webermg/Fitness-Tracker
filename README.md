@@ -18,7 +18,11 @@ npm install
 ```
 
 ## Usage
+https://stormy-taiga-03998.herokuapp.com/
+
 From the home screen select to either continue the last workout or create a new one. From the view page, add exercises as desired to fill up the workout.
+
+![demo](assets/fitness-demo.gif?raw=true)
 
 ## License
 This project is licensed under the MIT license
