@@ -1,6 +1,5 @@
 <div class="container">
-  <h1>Workout Tracker</h1>
-  <div class="row">
+  <div class="row mt-5">
     <div class="col-12">
       {{#each workouts}}
       <div data-id="{{this._id}}" class="card workout-card" style="width: 30rem;">
@@ -14,7 +13,7 @@
           <div class="card">
             <div class="card-header d-flex" id="heading{{this._id}}">
               <h2 class="mb-0 flex-fill">
-                <button class="btn btn-link btn-block text-left" type="button" data-toggle="collapse"
+                <button class="btn btn-link btn-block text-left font-weight-bold" type="button" data-toggle="collapse"
                   data-target="#collapse{{this._id}}" aria-expanded="true" aria-controls="collapse{{this._id}}">
                   {{this.name}}
                   
@@ -28,14 +27,14 @@
               data-parent="#accordionExample">
               <div class="card-body">
                 <ul class="list-group list-group">
-                  <li class="list-group-item">Type: {{this.type}}</li>
-                  <li class="list-group-item">Duration: {{this.duration}} minutes</li>
+                  <li class="list-group-item">Type: <span class="font-weight-bold">{{this.type}}</span></li>
+                  <li class="list-group-item">Duration: <span class="font-weight-bold">{{this.duration}} minutes</span></li>
                   {{#if (isCardio this.type)}}
-                  <li class="list-group-item">Distance: {{this.distance}} miles</li>
+                  <li class="list-group-item">Distance: <span class="font-weight-bold">{{this.distance}} miles</span></li>
                   {{else}}
-                  <li class="list-group-item">Weight: {{this.weight}} lbs</li>
-                  <li class="list-group-item">Sets: {{this.sets}}</li>
-                  <li class="list-group-item">Reps: {{this.reps}}</li>
+                  <li class="list-group-item">Weight: <span class="font-weight-bold">{{this.weight}} lbs</span></li>
+                  <li class="list-group-item">Sets: <span class="font-weight-bold">{{this.sets}}</span></li>
+                  <li class="list-group-item">Reps: <span class="font-weight-bold">{{this.reps}}</span></li>
                   {{/if}}
 
                 </ul>
@@ -52,7 +51,7 @@
     </div>
   </div>
   {{#if workouts}}
-  <div class="row">
+  <div class="row mt-5">
     <div class="col-12">
       <div class="card" style="width: 30rem;">
         <div class="card-body">
@@ -85,10 +84,10 @@
             <hr />
             <div class="row">
               <div class="col">
-                <input type="number" min="0" id="distance-field" class="form-control" placeholder="Distance">
+                <input type="number" min="0" id="distance-field" class="form-control" placeholder="Distance(mi)">
               </div>
               <div class="col">
-                <input type="number" min="0" id="weight-field" class="form-control" placeholder="Weight" disabled>
+                <input type="number" min="0" id="weight-field" class="form-control" placeholder="Weight(lbs)" disabled>
                 <input type="number" min="0" id="sets-field" class="form-control" placeholder="Sets" disabled>
                 <input type="number" min="0" id="reps-field" class="form-control" placeholder="Reps" disabled>
               </div>

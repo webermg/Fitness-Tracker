@@ -11,5 +11,4 @@ document.getElementById("new-button").addEventListener("click", function() {
     location.href = "/view"
   })
   .catch(err => console.log(err));
-  
 })
