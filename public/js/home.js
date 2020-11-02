@@ -1,6 +1,8 @@
 document.getElementById("new-button").addEventListener("click", function() {
   const newWorkout = {};
-  newWorkout.day = Date.now() - Date.getTimeZoneOffset;
+  day = new Date()
+  day-= day.getTimezoneOffset()*60*1000;
+  newWorkout.day = day;
   fetch(`/api/workouts`, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
